@@ -1,0 +1,21 @@
+<h1>TODO-LIST</h1>
+
+<div class="container">
+  <div class="row">
+    <app-todo-form (addGoal)="addNewTodo($event)"></app-todo-form>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row" *ngFor="let todo of todos;let i = index">
+    <div class="row">
+      <h4 id="{{i}}" appStrikethrough>{{todo.title}} due on {{todo.completeDate|date|uppercase}}</h4>
+      <button class="btn btn-primary" (click)='toogleDetails(i)'>Toogle Details</button>
+    </div>
+
+    <div class="row" *ngIf="todo.showDescription">
+      <app-todo-item [todo]='todo' (isComplete)='deleteTodo($event,i)'>
+      </app-todo-item>
+    </div>
+  </div>
+</div>
